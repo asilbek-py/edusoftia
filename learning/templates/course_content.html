@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Construction & Evolution | E-Learning Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #ffd166;
+            --danger: #ef476f;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .logo span {
+            color: var(--warning);
+        }
+
+        .chapters {
+            padding: 0 15px;
+        }
+
+        .chapter-item {
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .chapter-header {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 12px 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .chapter-header:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chapter-header.active {
+            background-color: var(--accent);
+        }
+
+        .topics {
+            background-color: rgba(0, 0, 0, 0.2);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .topics.show {
+            max-height: 500px;
+        }
+
+        .topic-item {
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .topic-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .topic-item.active {
+            background-color: var(--accent);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 50px;
+            padding: 5px 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            padding: 8px;
+            width: 200px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .content h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .content p {
+            margin-bottom: 15px;
+        }
+
+        .content ul,
+        .content ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .content li {
+            margin-bottom: 8px;
+        }
+
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .quiz-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .option {
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background-color: #e2e6ea;
+        }
+
+        .option.selected {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--light-gray);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--success);
+            width: 65%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    {% block content %}
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="chapters">
+                {% for chapter in course.chapters.all %}
+                <div class="chapter-item">
+                    <div class="chapter-header {% if forloop.first %}active{% endif %}">
+                        <span>{{ chapter.title }}</span>
+                        <i class="fas {% if forloop.first %}fa-chevron-down{% else %}fa-chevron-right{% endif %}"></i>
+                    </div>
+                    <div class="topics {% if forloop.first %}show{% endif %}">
+                        {% for topic in chapter.topics.all %}
+                        <div class="topic-item {% if forloop.first and forloop.parentloop.first %}active{% endif %}">
+                            {{ topic.title }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h2>{{ course.title }}</h2>
+                <div class="user-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    <div class="user-profile">
+                        <div class="avatar">{{ request.user.username|slice:":2"|upper }}</div>
+                        <span>{{ request.user.username }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content (first topic default) -->
+            {% with first_chapter=course.chapters.first %}
+            {% if first_chapter %}
+            {% with first_topic=first_chapter.topics.first %}
+            {% if first_topic %}
+            <div class="content">
+                <h2>{{ first_topic.title }}</h2>
+                <p>{{ first_topic.content|safe }}</p>
+            </div>
+            {% endif %}
+            {% endwith %}
+            {% endif %}
+            {% endwith %}
+
+            <!-- Quiz Section -->
+            {% if first_chapter and first_chapter.quiz %}
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h3>{{ first_chapter.quiz.title }}</h3>
+                    <span>Progress: 0/{{ first_chapter.quiz.questions.count }} questions</span>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+
+                {% for question in first_chapter.quiz.questions.all %}
+                <div class="question">
+                    <h4>{{ question.text }}</h4>
+
+                    <div class="options">
+                        {% for choice in question.choices.all %}
+                        <div class="option">{{ choice.text }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div class="navigation">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-arrow-left"></i> Previous Question
+                    </button>
+                    <button class="btn btn-primary">
+                        Next Question <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}
+    <script>
+        // Toggle chapter topics
+        document.querySelectorAll('.chapter-header').forEach(header => {
+            header.addEventListener('click', () => {
+                // Toggle current chapter
+                const topics = header.nextElementSibling;
+                const icon = header.querySelector('i');
+
+                // Close all other chapters
+                document.querySelectorAll('.topics').forEach(t => {
+                    if (t !== topics) {
+                        t.classList.remove('show');
+                        t.previousElementSibling.querySelector('i').className = 'fas fa-chevron-right';
+                    }
+                });
+
+                // Toggle current chapter
+                topics.classList.toggle('show');
+                icon.className = topics.classList.contains('show') ?
+                    'fas fa-chevron-down' : 'fas fa-chevron-right';
+            });
+        });
+
+        // Topic selection
+        document.querySelectorAll('.topic-item').forEach(topic => {
+            topic.addEventListener('click', () => {
+                document.querySelectorAll('.topic-item').forEach(t => {
+                    t.classList.remove('active');
+                });
+                topic.classList.add('active');
+            });
+        });
+
+        // Quiz option selection
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selection from all options in this question
+                option.parentElement.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+
+                // Select clicked option
+                option.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+
+</html>
