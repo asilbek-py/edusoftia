@@ -46,6 +46,8 @@ class TopicAdmin(admin.ModelAdmin):
     list_display = ("title", "chapter", "order")
     list_filter = ("chapter",)
     search_fields = ("title", "content")
+    # filter fields
+    list_filter = ("chapter",)
 
 
 @admin.register(Quiz)

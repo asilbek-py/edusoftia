@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
 class Course(models.Model):
@@ -36,7 +37,8 @@ class Topic(models.Model):
         Chapter, related_name="topics", on_delete=models.CASCADE
     )
     title = models.CharField(max_length=200)
-    content = models.TextField()  # HTML nazariya qismi
+    content = RichTextField()
+
     order = models.PositiveIntegerField(default=1)
 
     class Meta:

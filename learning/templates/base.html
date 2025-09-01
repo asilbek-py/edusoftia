@@ -44,6 +44,7 @@
                             <!-- SoftBuild -->
                         </a>
                         <!-- ***** Logo End ***** -->
+                        <div id="loader"></div>
 
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
@@ -51,8 +52,14 @@
                             <li><a href="#features">About Module</a></li>
                             <li><a href="#work-process">Learning Process</a></li>
                             <li><a href="#testimonials">Student Feedback</a></li>
-                            <li><a href="#contact-us">Contact</a></li>  
-                            <li class="nav-item-courses" style="text-align: center; "><a href="{% url 'course_content' %}">Courses</a></li>
+                            <li><a href="#contact-us">Contact</a></li>
+                            <li>
+                                <a class="course-content-link" style="font-size: 20px; border: 3px solid #ff589e;"
+                                    href="{% url 'course_content' %}" onclick="pageTransition(event)">
+                                    Courses
+                                </a>
+                            </li>
+
                         </ul>
                         <a class="menu-trigger">
                             <span>Menu</span>
@@ -105,6 +112,17 @@
 
     <!-- Global Init -->
     <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script>
+        function pageTransition(e) {
+            e.preventDefault();
+            document.getElementById("loader").style.display = "block"; // loader chiqadi
+            document.body.style.transition = "opacity 0.5s";
+            document.body.style.opacity = 0.5; // sekin o‘chadi
+            setTimeout(() => {
+                window.location.href = e.target.href;
+            }, 1000); // loader 1.5s ko‘rinib turadi
+        }
+    </script>
 
 </body>
 
