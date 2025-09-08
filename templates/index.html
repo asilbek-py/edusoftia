@@ -37,7 +37,8 @@
                         data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
                         <div class="features-small-item">
                             <div class="icon">
-                                <i><img src="assets/images/featured-item-01.png" alt="Interactive lessons icon"></i>
+                                <i><img src="{% static 'assets/images/InteractiveLessons.png' %}"
+                                        alt="Interactive lessons icon" style="width: 100%;"></i>
                             </div>
                             <h5 class="features-title">Interactive Lessons</h5>
                             <p>Step-by-step theory combined with code examples and live demos so students learn by
@@ -51,7 +52,8 @@
                         data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
                         <div class="features-small-item">
                             <div class="icon">
-                                <i><img src="assets/images/featured-item-02.png" alt="Assessments icon"></i>
+                                <i><img src="{% static 'assets/images/AssessmentsQuizzes.png' %}" alt="Assessments icon"
+                                        style="width: 100%;"></i>
                             </div>
                             <h5 class="features-title">Assessments & Quizzes</h5>
                             <p>Formative quizzes and practical assignments to evaluate understanding and application
@@ -65,7 +67,8 @@
                         data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
                         <div class="features-small-item">
                             <div class="icon">
-                                <i><img src="assets/images/featured-item-03.png" alt="Progress tracking icon"></i>
+                                <i><img src="{% static 'assets/images/ProgressTracking.png' %}"
+                                        alt="Progress tracking icon" style="width: 100%;"></i>
                             </div>
                             <h5 class="features-title">Progress Tracking</h5>
                             <p>Track student progress, completion rates, and generate reports for instructors.</p>
@@ -85,8 +88,8 @@
         <div class="row">
             <div class="col-lg-5 col-md-12 col-sm-12 align-self-center"
                 data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
-                <img src="assets/images/left-image.png" class="rounded img-fluid d-block mx-auto"
-                    alt="Module overview screenshot">
+                <img src="{% static 'assets/images/Interactive-Lessons.jpg' %}"
+                    class="rounded img-fluid d-block mx-auto" alt="Module overview screenshot">
             </div>
             <div class="col-lg-1"></div>
             <div class="col-lg-6 col-md-12 col-sm-12 align-self-center mobile-top-fix">
@@ -109,72 +112,6 @@
 </section>
 <!-- ***** Features Big Item End ***** -->
 
-
-<!-- ***** Home Parallax Start ***** -->
-<section class="mini" id="work-process">
-    <div class="mini-content">
-        <div class="container">
-            <div class="row">
-                <div class="offset-lg-3 col-lg-6">
-                    <div class="info">
-                        <h1>Work Process</h1>
-                        <p>Aenean nec tempor metus. Maecenas ligula dolor, commodo in imperdiet interdum, vehicula ut
-                            ex. Donec ante diam.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ***** Mini Box Start ***** -->
-            <div class="row">
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Get Ideas</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Sketch Up</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Discuss</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Revise</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Approve</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Launch</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-            </div>
-            <!-- ***** Mini Box End ***** -->
-        </div>
-    </div>
-</section>
-<!-- ***** Home Parallax End ***** -->
-
 <!-- ***** Testimonials Start ***** -->
 <section class="section" id="testimonials">
     <div class="container">
@@ -182,13 +119,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="center-heading">
-                    <h2 class="section-title">What do they say?</h2>
+                    <h2 class="section-title">What Our Students Say</h2>
                 </div>
             </div>
             <div class="offset-lg-3 col-lg-6">
                 <div class="center-text">
-                    <p>Donec tempus, sem non rutrum imperdiet, lectus orci fringilla nulla, at accumsan elit eros a
-                        turpis. Ut sagittis lectus libero.</p>
+                    <p>Here are some words from learners who have successfully completed our courses and applied their
+                        knowledge in real projects.</p>
                 </div>
             </div>
         </div>
@@ -199,15 +136,15 @@
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="team-item">
                     <div class="team-content">
-                        <i><img src="assets/images/testimonial-icon.png" alt=""></i>
-                        <p>Proin a neque nisi. Nam ipsum nisi, venenatis ut nulla quis, egestas scelerisque orci.
-                            Maecenas a finibus odio.</p>
+                        <i><img src="{% static 'assets/images/testimonial-icon.png' %}" alt=""></i>
+                        <p>"The platform is very well structured and easy to follow. I learned how to build and manage
+                            software projects effectively."</p>
                         <div class="user-image">
-                            <img src="http://placehold.it/60x60" alt="">
+                            <img src="{% static 'assets/images/user1.jpg' %}" alt="">
                         </div>
                         <div class="team-info">
-                            <h3 class="user-name">Catherine Soft</h3>
-                            <span>Managing Director</span>
+                            <h3 class="user-name">Falonchi Pistonchiyev</h3>
+                            <span>Software Engineer</span>
                         </div>
                     </div>
                 </div>
@@ -218,15 +155,15 @@
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="team-item">
                     <div class="team-content">
-                        <i><img src="assets/images/testimonial-icon.png" alt=""></i>
-                        <p>Integer molestie aliquam gravida. Nullam nec arcu finibus, imperdiet nulla vitae, placerat
-                            nibh. Cras maximus venenatis molestie.</p>
+                        <i><img src="{% static 'assets/images/testimonial-icon.png' %}" alt=""></i>
+                        <p>"Thanks to this course, I was able to understand complex software lifecycle concepts and
+                            apply them in my startup projects."</p>
                         <div class="user-image">
-                            <img src="http://placehold.it/60x60" alt="">
+                            <img src="{% static 'assets/images/user2.jpg' %}" alt="">
                         </div>
                         <div class="team-info">
                             <h3 class="user-name">Kelvin Wood</h3>
-                            <span>Digital Marketer</span>
+                            <span>Startup Founder</span>
                         </div>
                     </div>
                 </div>
@@ -237,15 +174,15 @@
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="team-item">
                     <div class="team-content">
-                        <i><img src="assets/images/testimonial-icon.png" alt=""></i>
-                        <p>Quisque diam odio, maximus ac consectetur eu, auctor non lorem. Cras quis est non ante
-                            ultrices molestie. Ut vehicula et diam at aliquam.</p>
+                        <i><img src="{% static 'assets/images/testimonial-icon.png' %}" alt=""></i>
+                        <p>"A practical and engaging course! The electronic learning module helped me learn at my own
+                            pace and achieve great results."</p>
                         <div class="user-image">
-                            <img src="http://placehold.it/60x60" alt="">
+                            <img src="{% static 'assets/images/user3.jpg' %}" alt="">
                         </div>
                         <div class="team-info">
                             <h3 class="user-name">David Martin</h3>
-                            <span>Website Manager</span>
+                            <span>IT Project Manager</span>
                         </div>
                     </div>
                 </div>
@@ -363,8 +300,6 @@
     </div>
 </section>
 <!-- ***** Pricing Plans End ***** -->
-
-
 <!-- ***** Contact Us Start ***** -->
 <section class="section colored" id="contact-us">
     <div class="container">
@@ -372,13 +307,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="center-heading">
-                    <h2 class="section-title">Talk To Us</h2>
+                    <h2 class="section-title">Get in Touch</h2>
                 </div>
             </div>
             <div class="offset-lg-3 col-lg-6">
                 <div class="center-text">
-                    <p>Maecenas pellentesque ante faucibus lectus vulputate sollicitudin. Cras feugiat hendrerit semper.
-                    </p>
+                    <p>We’d love to hear from you! Whether you have a question about our courses, need support, or want
+                        to share feedback — feel free to reach out.</p>
                 </div>
             </div>
         </div>
@@ -387,13 +322,16 @@
         <div class="row">
             <!-- ***** Contact Text Start ***** -->
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <h5 class="margin-bottom-30">Keep in touch</h5>
+                <h5 class="margin-bottom-30">Contact Information</h5>
                 <div class="contact-text">
-                    <p>110-220 Quisque diam odio, maximus ac consectetur eu, 10260
-                        <br>auctor non lorem
+                    <p><strong>Address:</strong><br>
+                        123 Innovation Street,<br>
+                        Tashkent, Uzbekistan
                     </p>
-                    <p>You are NOT allowed to re-distribute Softy Pinko template on any template collection websites.
-                        Thank you.</p>
+                    <p><strong>Email:</strong> support@elearning.com<br>
+                        <strong>Phone:</strong> +998 90 123 45 67
+                    </p>
+                    <p>Follow us on social media for the latest updates and learning tips!</p>
                 </div>
             </div>
             <!-- ***** Contact Text End ***** -->
@@ -401,7 +339,7 @@
             <!-- ***** Contact Form Start ***** -->
             <div class="col-lg-8 col-md-6 col-sm-12">
                 <div class="contact-form">
-                    <form id="contact" action="" method="get">
+                    <form id="contact" action="" method="post">
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <fieldset>

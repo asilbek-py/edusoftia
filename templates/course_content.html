@@ -48,9 +48,22 @@
                         <input type="text" placeholder="Search...">
                     </div>
                     <div class="user-profile">
-                        <div class="avatar">{{ request.user.username|slice:":2"|upper }}</div>
-                        <span>{{ request.user.username }}</span>
+                        <div class="avatar">{{ request.user.first_name|slice:":1"|upper }}{{ request.user.last_name|slice:":1"|upper }}</div>
+                        <span>{{ request.user.first_name }}</span>
                     </div>
+                    <!-- button to home page when mouse hover color="#f72585"-->
+                    <button class="btn btn-outline home-btn" onclick="window.location.href='/'">
+                        <i class="fas fa-home"></i> Home
+                    </button>
+                    <style>
+                        .home-btn:hover {
+                            color: #f72585 !important;
+                            border-color: #f72585 !important;
+                        }
+                        .home-btn:hover i {
+                            color: #f72585 !important;
+                        }
+                    </style>
                 </div>
             </div>
 
