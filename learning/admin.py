@@ -1,76 +1,55 @@
 from django.contrib import admin
-from .models import Course, Chapter, Topic, Quiz, Question, Choice, UserProgress, QuizAttempt
-
-
-class ChapterInline(admin.TabularInline):
-    """Kurs ichida bo'limlarni tezda qo'shish uchun"""
-    model = Chapter
-    extra = 1
+from .models import (
+    Course, Chapter, Topic,
+    Quiz, Question, QuizQuestion, Choice,
+    UserProgress, QuizAttempt
+)
 
 
 class TopicInline(admin.TabularInline):
-    """Bo'lim ichida mavzularni qo'shish"""
+    """Chapter ichida Topiclarni ko‘rsatish"""
     model = Topic
     extra = 1
 
-
-class ChoiceInline(admin.TabularInline):
-    """Savol ichida variantlarni ko'rsatish"""
-    model = Choice
-    extra = 2
-
-
-class QuestionInline(admin.TabularInline):
-    """Quiz ichida savollarni tezda qo'shish"""
-    model = Question
-    extra = 1
+@admin.register(Chapter)
+class ChapterAdmin(admin.ModelAdmin):
+    list_display = ("id","title", "course", "order")
+    list_filter = ("course",)
+    search_fields = ("title", "course__title")
+    ordering = ("course", "order")
+    inlines = [TopicInline]
 
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ("title", "created_at")
     search_fields = ("title",)
-    inlines = [ChapterInline]
 
 
-@admin.register(Chapter)
-class ChapterAdmin(admin.ModelAdmin):
-    list_display = ("title", "course", "order")
-    list_filter = ("course",)
-    search_fields = ("title",)
-    inlines = [TopicInline]
-
-
-@admin.register(Topic)
-class TopicAdmin(admin.ModelAdmin):
-    list_display = ("title", "chapter", "order")
-    list_filter = ("chapter",)
-    search_fields = ("title", "content")
-    # filter fields
-    list_filter = ("chapter",)
-
-
-@admin.register(Quiz)
-class QuizAdmin(admin.ModelAdmin):
-    list_display = ("title", "chapter", "pass_score")
-    list_filter = ("chapter",)
-    search_fields = ("title", "description")
-    inlines = [QuestionInline]
+class ChoiceInline(admin.TabularInline):
+    """Question ichida variantlarni ko‘rsatish"""
+    model = Choice
+    extra = 2
 
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ("text", "quiz", "order")
-    list_filter = ("quiz",)
+    list_display = ("text",)
     search_fields = ("text",)
     inlines = [ChoiceInline]
 
 
-@admin.register(Choice)
-class ChoiceAdmin(admin.ModelAdmin):
-    list_display = ("text", "question", "is_correct")
-    list_filter = ("is_correct", "question")
-    search_fields = ("text",)
+class QuizQuestionInline(admin.TabularInline):
+    """Quiz ichida Questionlarni ko‘rsatish"""
+    model = QuizQuestion
+    extra = 1
+
+
+@admin.register(Quiz)
+class QuizAdmin(admin.ModelAdmin):
+    list_display = ("title", "pass_score")
+    search_fields = ("title",)
+    inlines = [QuizQuestionInline]
 
 
 @admin.register(UserProgress)
@@ -83,6 +62,9 @@ class UserProgressAdmin(admin.ModelAdmin):
 @admin.register(QuizAttempt)
 class QuizAttemptAdmin(admin.ModelAdmin):
     list_display = ("user", "quiz", "score", "passed", "attempt_date")
-    list_filter = ("passed", "quiz", "attempt_date")
+    list_filter = ("passed", "attempt_date", "quiz")
     search_fields = ("user__username", "quiz__title")
-    ordering = ("-attempt_date",)
+
+
+# Qo‘shimcha registratsiyalar
+admin.site.register(QuizQuestion)
