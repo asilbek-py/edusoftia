@@ -42,8 +42,22 @@ def topic_detail(request, topic_id):
 def quiz_view(request, chapter_id):
     """Chapter oxiridagi quiz"""
     quiz = get_object_or_404(Quiz, chapter_id=chapter_id)
+
+    # quiz ichidagi savollarni tartib bilan olish
+    questions = []
+    for qq in quiz.quiz_questions.select_related("question").all():
+        question = qq.question
+        questions.append({
+            "id": question.id,
+            "text": question.text,
+            "choices": question.choices.all()
+        })
+
     return render(
         request,
         "quiz.html",
-        {"quiz": quiz, "questions": quiz.questions.all()},  # type: ignore
+        {
+            "quiz": quiz,
+            "questions": questions
+        },
     )

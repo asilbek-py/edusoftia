@@ -24,6 +24,7 @@
                         <i
                             class="fas {% if chapter.id == current_topic.chapter.id %}fa-chevron-down{% else %}fa-chevron-right{% endif %}"></i>
                     </div>
+
                     <div class="topics {% if chapter.id == current_topic.chapter.id %}show{% endif %}">
                         {% for topic in chapter.topics.all %}
                         <div class="topic-item {% if topic.id == current_topic.id %}active{% endif %}"
@@ -31,11 +32,19 @@
                             {{ topic.title }}
                         </div>
                         {% endfor %}
+
+                        <!-- ✅ har bir chapter oxirida chiqadigan QUIZ -->
+                        <div class="topic-item" onclick="window.location.href='{% url 'quiz_view' chapter.id %}'"
+                            style="padding:8px 12px; cursor:pointer; font-weight:bold; background:#ff0000; text-align:center; border-radius:4px;">
+                            <a style="color:white; text-decoration: none;" href="{% url 'quiz_view' chapter.id %}">QUIZ</a>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
+
+
 
 
         <!-- Main Content -->
@@ -48,7 +57,8 @@
                         <input type="text" placeholder="Search...">
                     </div>
                     <div class="user-profile">
-                        <div class="avatar">{{ request.user.first_name|slice:":1"|upper }}{{ request.user.last_name|slice:":1"|upper }}</div>
+                        <div class="avatar">{{ request.user.first_name|slice:":1"|upper }}{{
+                            request.user.last_name|slice:":1"|upper }}</div>
                         <span>{{ request.user.first_name }}</span>
                     </div>
                     <!-- button to home page when mouse hover color="#f72585"-->
@@ -60,6 +70,7 @@
                             color: #f72585 !important;
                             border-color: #f72585 !important;
                         }
+
                         .home-btn:hover i {
                             color: #f72585 !important;
                         }
@@ -70,8 +81,9 @@
 
             <div class="content" id="main-content">
                 {% if selected_topic %}
-                <h2 style="color:#3b82f6;"><span style="color: #f72585;">#THEME:</span> {{ selected_topic.title|upper }}</h2>
-                <p>{{ selected_topic.content|safe  }}</p>
+                <h2 style="color:#3b82f6;"><span style="color: #f72585;">#THEME:</span> {{ selected_topic.title|upper }}
+                </h2>
+                <p>{{ selected_topic.content|safe }}</p>
                 {% else %}
                 {% if first_topic %}
                 <div class="content">

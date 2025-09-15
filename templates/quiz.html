@@ -1,0 +1,594 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Software Construction & Evolution</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+        }
+
+        .quiz-header h1 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #8b5cf6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .quiz-content {
+            padding: 25px;
+        }
+
+        .quiz-info h2 {
+            color: #4f46e5;
+            margin-bottom: 15px;
+        }
+
+        .quiz-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6b7280;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #4f46e5;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .question-block {
+            margin-bottom: 25px;
+        }
+
+        .question-header {
+            margin-bottom: 20px;
+        }
+
+        .question-header h3 {
+            font-size: 1.2rem;
+            color: #1f2937;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option:hover {
+            border-color: #a5b4fc;
+            background: #f5f7ff;
+        }
+
+        .option.selected {
+            border-color: #4f46e5;
+            background: #eef2ff;
+        }
+
+        .option-selector {
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-circle {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #d1d5db;
+            position: relative;
+        }
+
+        .option.selected .option-circle {
+            border-color: #4f46e5;
+            background: #4f46e5;
+        }
+
+        .option.selected .option-circle::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .option-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #4338ca;
+        }
+
+        .nav-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .submit-btn {
+            background: #10b981;
+        }
+
+        .submit-btn:hover {
+            background: #059669;
+        }
+
+        .quiz-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-top: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+
+        .time-remaining {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .exit-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #f3f4f6;
+            color: #4b5563;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .exit-btn:hover {
+            background: #e5e7eb;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            color: #f59e0b;
+            margin-bottom: 15px;
+        }
+
+        .modal-content h2 {
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+
+        .modal-score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4f46e5;
+            margin: 20px 0;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .modal-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .modal-btn-primary {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background: #4338ca;
+        }
+
+        .modal-btn-secondary {
+            background: #e5e7eb;
+            color: #4b5563;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #d1d5db;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-container">
+        <header class="quiz-header">
+            <h1><i class="fas fa-graduation-cap"></i> Software Construction & Evolution</h1>
+            <div class="user-info">
+                <div class="user-avatar">JS</div>
+                <span>John Smith</span>
+            </div>
+        </header>
+
+        <div class="quiz-content">
+            <div class="quiz-info">
+                <h2>Chapter 1: Introduction Quiz</h2>
+                <div class="quiz-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>30 Questions</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>60 Minutes</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-award"></i>
+                        <span>100 Points</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span>Question <span id="current-question">1</span> of 30</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 3.33%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                {% for q in questions %}
+                <div class="question-block" id="question-{{ forloop.counter0 }}"
+                    style="display: {% if forloop.first %}block{% else %}none{% endif %};">
+                    <div class="question-header">
+                        <h3>{{ q.text }}</h3>
+                    </div>
+                    <div class="options-container">
+                        {% for choice in q.choices %}
+                        <div class="option" data-option="{{ choice.id }}">
+                            <div class="option-selector">
+                                <div class="option-circle"></div>
+                            </div>
+                            <div class="option-text">
+                                <span>{{ choice.text }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div class="question-navigation">
+                    <button class="nav-btn prev-btn" id="prevBtn" disabled>
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn next-btn" id="nextBtn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="nav-btn submit-btn" id="submitBtn" style="display:none;">
+                        Submit Quiz <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-footer">
+            <div class="time-remaining">
+                <i class="fas fa-clock"></i>
+                <span>Time remaining: <strong id="time-display">60:00</strong></span>
+            </div>
+            <button class="exit-btn" id="exitBtn">
+                <i class="fas fa-times"></i> Exit Quiz
+            </button>
+        </div>
+    </div>
+
+    <!-- Quiz Completion Modal -->
+    <div class="modal-overlay" id="result-modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h2>Quiz Completed!</h2>
+            <p>You have successfully completed the quiz.</p>
+            <div class="modal-score">
+                <span id="final-score">85%</span>
+            </div>
+            <p id="result-message">Great job! You have a good understanding of this chapter.</p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-primary" id="review-btn">
+                    Review Answers
+                </button>
+                <button class="modal-btn modal-btn-secondary" id="continue-btn">
+                    Continue Learning
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // DOM elements
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const exitBtn = document.getElementById('exitBtn');
+            const currentQuestionEl = document.getElementById('current-question');
+            const progressFillEl = document.querySelector('.progress-fill');
+            const timeDisplayEl = document.getElementById('time-display');
+            const modal = document.getElementById('result-modal');
+            const finalScoreEl = document.getElementById('final-score');
+            const resultMessageEl = document.getElementById('result-message');
+            const reviewBtn = document.getElementById('review-btn');
+            const continueBtn = document.getElementById('continue-btn');
+
+            // Quiz state
+            let currentQuestion = 1;
+            const totalQuestions = document.querySelectorAll('.question-block').length;
+            const userAnswers = {};
+            let timer;
+            let timeLeft = 3600; // 1 hour in seconds
+
+            // Initialize quiz
+            function initQuiz() {
+                updateProgress();
+                startTimer();
+
+                // Add event listeners to options
+                document.querySelectorAll('.option').forEach(option => {
+                    option.addEventListener('click', function () {
+                        const questionBlock = this.closest('.question-block');
+                        const questionId = Array.from(document.querySelectorAll('.question-block')).indexOf(questionBlock) + 1;
+                        const optionId = this.getAttribute('data-option');
+
+                        // Remove selected class from all options in this question
+                        questionBlock.querySelectorAll('.option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+
+                        // Add selected class to clicked option
+                        this.classList.add('selected');
+
+                        // Store user answer
+                        userAnswers[questionId] = optionId;
+                    });
+                });
+            }
+
+            // Update progress
+            function updateProgress() {
+                const progressPercent = Math.round((currentQuestion / totalQuestions) * 100);
+                currentQuestionEl.textContent = currentQuestion;
+                progressFillEl.style.width = `${progressPercent}%`;
+
+                prevBtn.disabled = currentQuestion === 1;
+
+                if (currentQuestion === totalQuestions) {
+                    submitBtn.style.display = 'flex';
+                    nextBtn.style.display = 'none';
+                } else {
+                    submitBtn.style.display = 'none';
+                    nextBtn.style.display = 'flex';
+                }
+
+                // Show current question, hide others
+                document.querySelectorAll('.question-block').forEach((block, index) => {
+                    block.style.display = (index === currentQuestion - 1) ? 'block' : 'none';
+                });
+            }
+
+            // Start timer
+            function startTimer() {
+                clearInterval(timer);
+                updateTimeDisplay();
+
+                timer = setInterval(function () {
+                    timeLeft--;
+                    updateTimeDisplay();
+
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        submitQuiz();
+                    }
+                }, 1000);
+            }
+
+            // Update time display
+            function updateTimeDisplay() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timeDisplayEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                // Change color when time is running out
+                if (timeLeft < 300) { // 5 minutes
+                    timeDisplayEl.style.color = '#ef4444';
+                }
+            }
+
+            // Submit quiz
+            function submitQuiz() {
+                clearInterval(timer);
+
+                // Calculate score (for demo purposes, we'll use a random score)
+                const score = Math.floor(Math.random() * 40) + 60; // Random score between 60-100
+                finalScoreEl.textContent = `${score}%`;
+
+                if (score >= 80) {
+                    resultMessageEl.textContent = "Excellent! You have mastered this chapter.";
+                } else if (score >= 60) {
+                    resultMessageEl.textContent = "Good job! You have a solid understanding.";
+                } else {
+                    resultMessageEl.textContent = "You might want to review this chapter again.";
+                }
+
+                modal.style.display = 'flex';
+            }
+
+            // Event listeners
+            nextBtn.addEventListener('click', function () {
+                if (currentQuestion < totalQuestions) {
+                    currentQuestion++;
+                    updateProgress();
+                }
+            });
+
+            prevBtn.addEventListener('click', function () {
+                if (currentQuestion > 1) {
+                    currentQuestion--;
+                    updateProgress();
+                }
+            });
+
+            submitBtn.addEventListener('click', submitQuiz);
+
+            exitBtn.addEventListener('click', function () {
+                if (confirm('Are you sure you want to exit? Your progress will be lost.')) {
+                    window.location.href = '/'; // Redirect to home page
+                }
+            });
+
+            continueBtn.addEventListener('click', function () {
+                window.location.href = '/course-content/';
+            });
+
+            // Start the quiz
+            initQuiz();
+        });
+    </script>
+</body>
+
+</html>
