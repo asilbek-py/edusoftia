@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_ckeditor_5',
     'learning',
     "ckeditor",
 ]
@@ -126,23 +125,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# CKEditor5 sozlamalari
-CKEDITOR_5_CUSTOM_CSS = 'css/custom_ckeditor.css'  # agar xohlasang frontend style
-CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
-
-CKEDITOR_5_CONFIGS = {
-    "default": {
-        "toolbar": [
-            "heading", "|",
-            "bold", "italic", "underline", "link", "|",
-            "bulletedList", "numberedList", "|",
-            "blockQuote", "insertTable", "mediaEmbed", "|",
-            "undo", "redo",
-        ],
-        "height": 300,
-        "width": "100%",
-    },
-}
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
