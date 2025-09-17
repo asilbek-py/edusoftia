@@ -140,9 +140,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     continueBtn.addEventListener('click', function () {
-        window.location.href = '/course-content/';
-    });
+        // Loading overlayni ko‘rsatamiz
+        document.getElementById("redirect-loading").style.display = "flex";
 
+        // 1 sekunddan keyin redirect
+        setTimeout(function () {
+            window.location.href = "/course/";
+        }, 1000);
+    });
     // Start the quiz
     initQuiz();
 });

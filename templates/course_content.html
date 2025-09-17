@@ -17,6 +17,30 @@
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
+            <div class="profile-info" style="text-align: center; margin-bottom: 20px;">
+                <img src="{% static 'assets/images/user-icon.png' %}" alt=""
+                    style="width: 250px; height: 250px; border-radius: 50%; background: white; padding: 10px;">
+
+                <h2 style="color: #ffffff; margin-top: 10px;">
+                    {% if request.user.first_name or request.user.last_name %}
+                    {{ request.user.first_name }} {% if request.user.last_name %}{{ request.user.last_name }}{% endif %}
+                    {% else %}
+                    {{ request.user.username }}
+                    {% endif %}
+                </h2>
+                <p style="color: #ffffff;">Student</p>
+
+                <div style="text-align: left; margin-left: 20px;">
+                    <h3 style="color: #ffffff;">Topic Progress: {{ topic_progress }}%</h3>
+                    <h3 style="color: #ffffff;">Completed Topics: {{ completed_topics }}/{{ total_topics }}</h3>
+                    <h3 style="color: #ffffff;">Quiz Progress: {{ quiz_progress }}%</h3>
+                    <h3 style="color: #ffffff;">Completed Quizzes: {{ completed_quizzes }}/{{ total_quizzes }}</h3>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #ffffff; margin-bottom: 20px;">COURSE CHAPTERS</h2>
+            <h2></h2>
+
             <div class="chapters">
                 {% for chapter in course.chapters.all %}
                 <div class="chapter-item">
@@ -28,9 +52,12 @@
 
                     <div class="topics {% if chapter.id == current_topic.chapter.id %}show{% endif %}">
                         {% for topic in chapter.topics.all %}
-                        <div class="topic-item {% if topic.id == current_topic.id %}active{% endif %}"
+                        <div class="topic-item {% if topic.id == current_topic.id %}active{% endif %} "
                             onclick="window.location.href='{% url 'course_topic' topic.id %}'">
                             {{ topic.title }}
+                            {% if topic.id in completed_topic_ids %}
+                            <span style="color: #22c55e;">✅</span>
+                            {% endif %}
                         </div>
                         {% endfor %}
 
@@ -45,8 +72,6 @@
                 {% endfor %}
             </div>
         </div>
-
-
 
 
         <!-- Main Content -->
@@ -101,6 +126,10 @@
                 </div>
                 {% endif %}
                 {% endif %}
+                <a href="{% url 'next_topic' selected_topic.id %}" class="btn btn-primary" style="text-decoration: none;">
+                    Next Topic <i class="fas fa-arrow-right"></i>
+                </a>
+
             </div>
 
             <!-- Quiz Section -->
@@ -140,6 +169,8 @@
         </div>
     </div>
     {% endblock %}
+
+
     <script>
         // Toggle chapter topics
         document.querySelectorAll('.chapter-header').forEach(header => {
