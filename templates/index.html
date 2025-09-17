@@ -62,7 +62,8 @@
                     </div>
                     <!-- ***** Features Small Item End ***** -->
 
-<!-- ***** Features Small Item Start ***** -->
+
+                    <!-- ***** Features Small Item Start ***** -->
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12"
                         data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
                         <div class="features-small-item">
@@ -118,90 +119,91 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="center-heading">
-                {% load static %}
+                    {% load static %}
 
-<h2 class="text-center my-4">Our Teachers</h2>
- <div class="offset-lg-3 col-lg-6">
-                <div class="center-text">
-                    <p>Meet our experienced instructors who are passionate about teaching and dedicated to helping you
-                        succeed in your learning journey.</p>
-                </div>            </div>
-<div class="container">
-  <div class="row">
+                    <h2 class="text-center my-4">Our Teachers</h2>
+                    <div class="offset-lg-3 col-lg-6">
+                        <div class="center-text">
+                            <p>Meet our experienced instructors who are passionate about teaching and dedicated to
+                                helping you
+                                succeed in your learning journey.</p>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
 
-    <!-- Teacher 1 -->
-    <div class="col-md-3 mb-4 d-flex">
-      <div class="card text-center shadow-sm border-0 flex-fill">
-        <img src="{% static 'images/teacher1.jpg' %}" 
-             class="card-img-top rounded-circle mx-auto mt-3"
-             alt="Teacher 1"
-             style="width:120px; height:120px; object-fit:cover;">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Mr. John Doe</h5>
-          <p class="text-muted">Mathematics Teacher</p>
-          <p class="card-text flex-grow-1">10+ years of experience teaching Algebra, Geometry, and Calculus. Passionate about problem solving and helping students succeed.</p>
-          <p class="small text-muted mt-auto">Email: john.doe@example.com</p>
-        </div>
-      </div>
-    </div>
+                            <!-- Teacher 1 -->
+                            <div class="col-md-3 mb-4 d-flex">
+                                <div class="card text-center shadow-sm border-0 flex-fill">
+                                    <img src="./../static/assets/images/teacher1.png"
+                                        class="card-img-top rounded-circle mx-auto mt-3" alt="Teacher 1"
+                                        style="width:120px; height:120px; object-fit:cover;">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">Sr Lect Dilafruz Abdullayeva</h5>
+                                        <p class="text-muted">Development of learning modules and interactive teaching
+                                            methods</p>
+                                        <p class="card-text flex-grow-1">Strong focus on user-friendly learning
+                                            interfaces, emphasizes student-centered design and usability.</p>
+                                    </div>
+                                </div>
+                            </div>
 
-<!-- Teacher 2 -->
-    <div class="col-md-3 mb-4 d-flex">
-      <div class="card text-center shadow-sm border-0 flex-fill">
-        <img src="{% static 'images/teacher2.jpg' %}" 
-             class="card-img-top rounded-circle mx-auto mt-3"
-             alt="Teacher 2"
-             style="width:120px; height:120px; object-fit:cover;">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Ms. Jane Smith</h5>
-          <p class="text-muted">Physics Teacher</p>
-          <p class="card-text flex-grow-1">Specialist in Mechanics and Thermodynamics. Known for making complex topics simple and engaging with experiments.</p>
-          <p class="small text-muted mt-auto">Email: jane.smith@example.com</p>
-        </div>
-      </div>
-    </div>
 
-    <!-- Teacher 3 -->
-    <div class="col-md-3 mb-4 d-flex">
-      <div class="card text-center shadow-sm border-0 flex-fill">
-        <img src="{% static 'images/teacher3.jpg' %}" 
-             class="card-img-top rounded-circle mx-auto mt-3"
-             alt="Teacher 3"
-             style="width:120px; height:120px; object-fit:cover;">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Dr. Emily Brown</h5>
-          <p class="text-muted">Computer Science Teacher</p>
-          <p class="card-text flex-grow-1">Expert in programming, web development, and AI. Loves inspiring students to create real-world applications.</p>
-          <p class="small text-muted mt-auto">Email: emily.brown@example.com</p>
-        </div>
-      </div>
-    </div>
+                            <!-- Teacher 2 -->
+                            <div class="col-md-3 mb-4 d-flex">
+                                <div class="card text-center shadow-sm border-0 flex-fill">
+                                    <img src="./../static/assets/images/teacher2.png"
+                                        class="card-img-top rounded-circle mx-auto mt-3"
+                                        alt="Smiling male professor in formal attire facing forward against a neutral background with a calm and welcoming expression"
+                                        style="width:120px; height:120px; object-fit:cover;">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">Prof. Kamoliddin Rakhmatov</h5>
+                                        <p class="text-muted">Software evolution and systems analysis</p>
+                                        <p class="card-text flex-grow-1">Published in international journals, able to
+                                            effectively combine theory with practical application.</p>
+                                    </div>
+                                </div>
+                            </div>
 
-    <!-- Teacher 4 -->
-    <div class="col-md-3 mb-4 d-flex">
-      <div class="card text-center shadow-sm border-0 flex-fill">
-        <img src="{% static 'images/teacher4.jpg' %}" 
-             class="card-img-top rounded-circle mx-auto mt-3"
-             alt="Teacher 4"
-             style="width:120px; height:120px; object-fit:cover;">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Mr. Alex White</h5>
-          <p class="text-muted">Chemistry Teacher</p>
-          <p class="card-text flex-grow-1">Specializes in Organic Chemistry. Loves practical lab work and encourages students to explore scientific curiosity.</p>
-          <p class="small text-muted mt-auto">Email: alex.white@example.com</p>
-        </div>
-      </div>
-    </div>
+                            <!-- Teacher 3 -->
+                            <div class="col-md-3 mb-4 d-flex">
+                                <div class="card text-center shadow-sm border-0 flex-fill">
+                                    <img src="./../static/assets/images/teacher3.png"
+                                        class="card-img-top rounded-circle mx-auto mt-3" alt="Teacher 3"
+                                        style="width:120px; height:120px; object-fit:cover;">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">Dr. Nigora Ismatova</h5>
+                                        <p class="text-muted">Educational Technologies and e-learning systems</p>
+                                        <p class="card-text flex-grow-1">Led research projects on e-learning platforms,
+                                            deeply knowledgeable about online teaching methods.</p>
+                                    </div>
+                                </div>
+                            </div>
 
-  </div>
-</div>
+                            <!-- Teacher 4 -->
+                            <div class="col-md-3 mb-4 d-flex">
+                                <div class="card text-center shadow-sm border-0 flex-fill">
+                                    <img src="./../static/assets/images/teacher4.png"
+                                        class="card-img-top rounded-circle mx-auto mt-3" alt="Teacher 4"
+                                        style="width:120px; height:120px; object-fit:cover;">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">Prof. Bekzod Yusupov</h5>
+                                        <p class="text-muted">Software development and architecture</p>
+                                        <p class="card-text flex-grow-1">Participated in large-scale projects, highly
+                                            experienced in modern software methodologies such as Agile and DevOps.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
 </section>
-        <!-- ***** Section Title End ***** -->
+<!-- ***** Section Title End ***** -->
 
 <!-- ***** Testimonials Start ***** -->
 <section class="section" id="testimonials">
@@ -223,15 +225,18 @@
         <!-- ***** Section Title End ***** -->
 
 
-<div class="row">
+        <div class="row">
             <!-- ***** Testimonials Item Start ***** -->
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="team-item">
                     <div class="team-content">
                         <i><img src="{% static 'assets/images/testimonial-icon.png' %}" alt=""></i>
-                        <p>"Edusoftia moduli nazariya va amaliyotni uyg‘unlashtirib, backend jarayonlarini tushunishimni yengillashtirdi hamda ish jarayonimda foydali bo‘ldi."</p>
+                        <p>"The Edusoftia module integrated theory and practice, making it easier for me to understand
+                            backend processes and proving useful in my work."</p>
                         <div class="user-image">
-                            <img src="{% static 'assets/images/user1.jpg' %}" alt="">
+                            <img src="./../static/assets/images/man.jpg"
+                                class="card-img-top rounded-circle mx-auto mt-3" alt="student 1"
+                                style="width: 55px; height: 45px; object-fit:cover;">
                         </div>
                         <div class="team-info">
                             <h3 class="user-name">Azizbek Qurbonov</h3>
@@ -247,9 +252,12 @@
                 <div class="team-item">
                     <div class="team-content">
                         <i><img src="{% static 'assets/images/testimonial-icon.png' %}" alt=""></i>
-                        <p>"Qulay interfeys va vizual materiallar mavzularni tez o‘zlashtirishimga yordam berdi, ularni frontend loyihalarimda samarali qo‘llash bilan tajribamni oshirdim."</p>
+                        <p>"The convenient interface and visual materials helped me quickly grasp topics, and applying
+                            them in frontend projects effectively improved my experience."</p>
                         <div class="user-image">
-                            <img src="{% static 'assets/images/user2.jpg' %}" alt="">
+                            <img src="./../static/assets/images/woman.jpg"
+                                class="card-img-top rounded-circle mx-auto mt-3" alt="student 2"
+                                style="width: 55px; height: 45px; object-fit:cover;">
                         </div>
                         <div class="team-info">
                             <h3 class="user-name">Mohira Soliyeva</h3>
@@ -265,9 +273,12 @@
                 <div class="team-item">
                     <div class="team-content">
                         <i><img src="{% static 'assets/images/testimonial-icon.png' %}" alt=""></i>
-                        <p>"Interaktiv topshiriqlar va testlar bilimlarni mustahkamlashga yordam berdi, o‘rganganimni real mobil loyihalarda muvaffaqiyatli qo‘llashimni osonlashtirdi."</p>
+                        <p>"Interactive tasks and tests helped reinforce knowledge, making it easier for me to
+                            successfully apply what I learned in real mobile projects."</p>
                         <div class="user-image">
-                            <img src="{% static 'assets/images/user3.jpg' %}" alt="">
+                            <img src="./../static/assets/images/man.png"
+                                class="card-img-top rounded-circle mx-auto mt-3" alt="student 3"
+                                style="width: 55px; height: 45px; object-fit:cover;">
                         </div>
                         <div class="team-info">
                             <h3 class="user-name">Sardor Rahmatullayev</h3>
@@ -281,7 +292,6 @@
     </div>
 </section>
 <!-- ***** Testimonials End ***** -->
-
 
 
 <!-- ***** Contact Us Start ***** -->
@@ -303,7 +313,7 @@
         </div>
         <!-- ***** Section Title End ***** -->
 
-<div class="row">
+        <div class="row">
             <!-- ***** Contact Text Start ***** -->
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <h5 class="margin-bottom-30">Contact Information</h5>

@@ -53,8 +53,8 @@ class Quiz(models.Model):
     description = models.TextField(blank=True, null=True)
     pass_score = models.PositiveIntegerField(default=50)  # foiz
 
-    # def __str__(self):
-    #     return f"{self.chapter.title} - {self.title}"
+    def __str__(self):
+        return f"{self.id} - {self.title}"
 
 
 class Question(models.Model):

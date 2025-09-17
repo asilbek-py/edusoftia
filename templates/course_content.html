@@ -36,7 +36,8 @@
                         <!-- ✅ har bir chapter oxirida chiqadigan QUIZ -->
                         <div class="topic-item" onclick="window.location.href='{% url 'quiz_view' chapter.id %}'"
                             style="padding:8px 12px; cursor:pointer; font-weight:bold; background:#ff0000; text-align:center; border-radius:4px;">
-                            <a style="color:white; text-decoration: none;" href="{% url 'quiz_view' chapter.id %}">QUIZ</a>
+                            <a style="color:white; text-decoration: none;"
+                                href="{% url 'quiz_view' chapter.id %}">QUIZ</a>
                         </div>
                     </div>
                 </div>
@@ -57,13 +58,20 @@
                         <input type="text" placeholder="Search...">
                     </div>
                     <div class="user-profile">
-                        <div class="avatar">{{ request.user.first_name|slice:":1"|upper }}{{
-                            request.user.last_name|slice:":1"|upper }}</div>
+                        <div class="avatar">
+                            {{ request.user.first_name|slice:":1"|upper }}
+                            {% if request.user.last_name %}{{ request.user.last_name|slice:":1"|upper }}{% endif %}
+                        </div>
                         <span>{{ request.user.first_name }}</span>
+
                     </div>
                     <!-- button to home page when mouse hover color="#f72585"-->
                     <button class="btn btn-outline home-btn" onclick="window.location.href='/'">
                         <i class="fas fa-home"></i> Home
+                    </button>
+                    <!-- logout button -->
+                    <button class="btn btn-outline home-btn" onclick="window.location.href='{% url 'logout' %}'">
+                        <i class="fas fa-sign-out-alt"></i> Logout
                     </button>
                     <style>
                         .home-btn:hover {

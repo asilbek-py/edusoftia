@@ -8,15 +8,67 @@
     <title>Quiz - Software Construction & Evolution</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'course/quiz_style.css' %}">
+    <style>
+        /* Loading overlay */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #704A74;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 0.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="quiz-container">
+    <!-- Loading screen -->
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="quiz-container" style="display:none;">
         <header class="quiz-header">
             <h1><i class="fas fa-graduation-cap"></i> Software Construction & Evolution</h1>
             <div class="user-info">
-                <div class="user-avatar">JS</div>
-                <span>John Smith</span>
+                <div class="user-avatar">
+                    {% if request.user.first_name or request.user.last_name %}
+                    {{ request.user.first_name|slice:":1"|upper }}{{ request.user.last_name|slice:":1"|upper }}
+                    {% else %}
+                    {{ request.user.get_full_name|slice:":1"|upper }}
+                    {% endif %}
+                </div>
+                <span>
+                    {% if request.user.first_name or request.user.last_name %}
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                    {% else %}
+                    {{ request.user.get_full_name }}
+                    {% endif %}
+                </span>
+
             </div>
         </header>
 
@@ -30,7 +82,7 @@
                     </div>
                     <div class="meta-item">
                         <i class="fas fa-clock"></i>
-                        <span>60 Minutes</span>
+                        <span>30 Minutes</span>
                     </div>
                     <div class="meta-item">
                         <i class="fas fa-award"></i>
@@ -87,7 +139,7 @@
         <div class="quiz-footer">
             <div class="time-remaining">
                 <i class="fas fa-clock"></i>
-                <span>Time remaining: <strong id="time-display">60:00</strong></span>
+                <span>Time remaining: <strong id="time-display">30:00</strong></span>
             </div>
             <button class="exit-btn" id="exitBtn">
                 <i class="fas fa-times"></i> Exit Quiz
@@ -118,9 +170,16 @@
         </div>
     </div>
 
-
     <script src="{% static 'course/quiz.js' %}"></script>
-
+    <script>
+        // Loading effect
+        window.addEventListener("load", function () {
+            setTimeout(() => {
+                document.getElementById("loading-overlay").style.display = "none";
+                document.querySelector(".quiz-container").style.display = "block";
+            }, 1000); // 1 second
+        });
+    </script>
 </body>
 
 </html>
